@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "main": "src/server.js",
   "scripts": {
-    "start": "node src/server.js",
     "test": "jest --forceExit --detectOpenHandles"
   },
   "keywords": [],
@@ -15,6 +14,7 @@
   },
   "devDependencies": {
     "jest": "^30.3.0",
+    "prettier": "^3.8.1",
     "supertest": "^7.2.2"
   }
 }
