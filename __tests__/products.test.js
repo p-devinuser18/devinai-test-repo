@@ -30,7 +30,7 @@ describe("GET /api/products", () => {
     });
   });
 
-  it("should filter products by category case-insensitively", async () => {
+  it("should filter products by category case-insensitively (all caps)", async () => {
     const res = await request(app)
       .get("/api/products?category=ELECTRONICS")
       .set("Authorization", "Bearer test-token");
@@ -38,6 +38,17 @@ describe("GET /api/products", () => {
     expect(res.body.length).toBe(2);
     res.body.forEach((product) => {
       expect(product.category).toBe("electronics");
+    });
+  });
+
+  it("should filter products by category case-insensitively (mixed case)", async () => {
+    const res = await request(app)
+      .get("/api/products?category=Books")
+      .set("Authorization", "Bearer test-token");
+    expect(res.statusCode).toBe(200);
+    expect(res.body.length).toBe(2);
+    res.body.forEach((product) => {
+      expect(product.category).toBe("books");
     });
   });
 
