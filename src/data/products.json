@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "name": "Wireless Mouse",
+    "price": 29.99,
+    "category": "electronics",
+    "inStock": true
+  },
+  {
+    "id": 2,
+    "name": "Mechanical Keyboard",
+    "price": 89.99,
+    "category": "electronics",
+    "inStock": true
+  },
+  {
+    "id": 3,
+    "name": "Running Shoes",
+    "price": 119.99,
+    "category": "sports",
+    "inStock": true
+  },
+  {
+    "id": 4,
+    "name": "Yoga Mat",
+    "price": 24.99,
+    "category": "sports",
+    "inStock": false
+  },
+  {
+    "id": 5,
+    "name": "Coffee Maker",
+    "price": 49.99,
+    "category": "kitchen",
+    "inStock": true
+  },
+  {
+    "id": 6,
+    "name": "Blender",
+    "price": 39.99,
+    "category": "kitchen",
+    "inStock": false
+  }
+]
