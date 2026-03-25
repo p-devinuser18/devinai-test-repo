@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { version } = require('../../package.json');
+const logger = require('../utils/logger');
 
 const startTime = Date.now();
 
@@ -11,6 +12,7 @@ router.get('/', (req, res) => {
     uptime,
     version,
   });
+  logger.info('Request handled', { method: req.method, path: req.originalUrl, statusCode: res.statusCode });
 });
 
 module.exports = router;
