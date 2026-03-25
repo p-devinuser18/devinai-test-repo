@@ -1,13 +1,13 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const products = require("../data/products.json");
+const products = require('../data/products.json');
 
-router.get("/", (req, res) => {
+router.get('/', (req, res) => {
   const { category } = req.query;
 
   if (category) {
     const filtered = products.filter(
-      (p) => p.category.toLowerCase() === category.toLowerCase(),
+      (p) => p.category.toLowerCase() === category.toLowerCase()
     );
     return res.json(filtered);
   }
