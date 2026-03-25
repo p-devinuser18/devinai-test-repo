@@ -3,6 +3,7 @@ const auth = require('./middleware/auth');
 const usersRouter = require('./routes/users');
 const healthRouter = require('./routes/health');
 const productsRouter = require('./routes/products');
+const weatherRouter = require("./routes/weather");
 
 const app = express();
 
@@ -13,6 +14,9 @@ app.use("/health", healthRouter);
 
 // Products endpoint — no auth middleware
 app.use('/api/products', productsRouter);
+
+// Weather endpoint
+app.use("/api/weather", weatherRouter);
 
 // Protected routes
 app.use("/users", auth, usersRouter);
