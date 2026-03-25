@@ -2,6 +2,7 @@ const express = require("express");
 const auth = require("./middleware/auth");
 const usersRouter = require("./routes/users");
 const productsRouter = require("./routes/products");
+const weatherRouter = require("./routes/weather");
 const healthRouter = require("./routes/health");
 const profileRouter = require("./routes/profile");
 
@@ -16,5 +17,6 @@ app.use("/health", healthRouter);
 app.use("/users", auth, usersRouter);
 app.use("/api/products", auth, productsRouter);
 app.use("/api/profile", profileRouter);
+app.use("/api/weather", weatherRouter);
 
 module.exports = app;
