@@ -105,10 +105,9 @@ describe("GET /api/weather/:city", () => {
       .get("/api/weather/London")
       .set("Authorization", "Bearer test-token");
 
-    expect(global.fetch).toHaveBeenCalledWith(
-      expect.stringContaining("appid=test-api-key"),
-      expect.any(Object)
-    );
+    const calledUrl = global.fetch.mock.calls[0][0];
+    const params = new URLSearchParams(calledUrl.split("?")[1]);
+    expect(params.get("appid")).toBe("test-api-key");
   });
 
   it("should require authentication", async () => {
