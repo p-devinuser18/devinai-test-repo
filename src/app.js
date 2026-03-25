@@ -12,9 +12,11 @@ app.use(express.json());
 // Health endpoint — no auth middleware
 app.use("/health", healthRouter);
 
+// Public routes
+app.use("/api/products", productsRouter);
+app.use("/api/weather", weatherRouter);
+
 // Protected routes
 app.use("/users", auth, usersRouter);
-app.use("/api/products", auth, productsRouter);
-app.use("/api/weather", weatherRouter);
 
 module.exports = app;

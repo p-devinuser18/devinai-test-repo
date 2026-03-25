@@ -1,44 +1,44 @@
 [
   {
     "id": 1,
-    "name": "Wireless Headphones",
-    "price": 79.99,
+    "name": "Wireless Mouse",
+    "price": 29.99,
     "category": "electronics",
     "inStock": true
   },
   {
     "id": 2,
-    "name": "USB-C Charger",
-    "price": 24.99,
+    "name": "Mechanical Keyboard",
+    "price": 89.99,
     "category": "electronics",
     "inStock": true
   },
   {
     "id": 3,
-    "name": "JavaScript: The Good Parts",
-    "price": 29.99,
-    "category": "books",
+    "name": "Running Shoes",
+    "price": 119.99,
+    "category": "sports",
     "inStock": true
   },
   {
     "id": 4,
-    "name": "Clean Code",
-    "price": 34.99,
-    "category": "books",
+    "name": "Yoga Mat",
+    "price": 24.99,
+    "category": "sports",
     "inStock": false
   },
   {
     "id": 5,
-    "name": "Cotton T-Shirt",
-    "price": 19.99,
-    "category": "clothing",
+    "name": "Coffee Maker",
+    "price": 49.99,
+    "category": "kitchen",
     "inStock": true
   },
   {
     "id": 6,
-    "name": "Denim Jeans",
-    "price": 49.99,
-    "category": "clothing",
-    "inStock": true
+    "name": "Blender",
+    "price": 39.99,
+    "category": "kitchen",
+    "inStock": false
   }
 ]
