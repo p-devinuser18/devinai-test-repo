@@ -8,37 +8,37 @@
   },
   {
     "id": 2,
-    "name": "USB-C Charger",
-    "price": 24.99,
+    "name": "Smartphone Case",
+    "price": 19.99,
     "category": "electronics",
     "inStock": true
   },
   {
     "id": 3,
+    "name": "Cotton T-Shirt",
+    "price": 24.99,
+    "category": "clothing",
+    "inStock": true
+  },
+  {
+    "id": 4,
+    "name": "Denim Jeans",
+    "price": 49.99,
+    "category": "clothing",
+    "inStock": false
+  },
+  {
+    "id": 5,
     "name": "JavaScript: The Good Parts",
     "price": 29.99,
     "category": "books",
     "inStock": true
   },
   {
-    "id": 4,
+    "id": 6,
     "name": "Clean Code",
     "price": 34.99,
     "category": "books",
     "inStock": false
-  },
-  {
-    "id": 5,
-    "name": "Cotton T-Shirt",
-    "price": 19.99,
-    "category": "clothing",
-    "inStock": true
-  },
-  {
-    "id": 6,
-    "name": "Denim Jeans",
-    "price": 49.99,
-    "category": "clothing",
-    "inStock": true
   }
 ]
