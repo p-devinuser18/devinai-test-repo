@@ -9,12 +9,12 @@ const app = express();
 app.use(express.json());
 
 // Health endpoint — no auth middleware
-app.use('/health', healthRouter);
+app.use("/health", healthRouter);
 
 // Products endpoint — no auth middleware
 app.use('/api/products', productsRouter);
 
 // Protected routes
-app.use('/users', auth, usersRouter);
+app.use("/users", auth, usersRouter);
 
 module.exports = app;
