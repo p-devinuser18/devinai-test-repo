@@ -1,52 +1,89 @@
 const request = require("supertest");
 const app = require("../src/app");
+const products = require("../src/data/products.json");
 
-describe("GET /products", () => {
-  it("should return 401 without auth token", async () => {
-    const res = await request(app).get("/products");
-    expect(res.statusCode).toBe(401);
-  });
-
-  it("should return 200 with auth token", async () => {
+describe("GET /api/products", () => {
+  it("should return all products when no category filter is provided", async () => {
     const res = await request(app)
-      .get("/products")
+      .get("/api/products")
       .set("Authorization", "Bearer test-token");
     expect(res.statusCode).toBe(200);
+    expect(res.body).toEqual(products);
+    expect(res.body.length).toBe(6);
   });
 
   it("should return JSON content type", async () => {
     const res = await request(app)
-      .get("/products")
+      .get("/api/products")
       .set("Authorization", "Bearer test-token");
     expect(res.headers["content-type"]).toMatch(/json/);
   });
 
-  it("should return an empty products array", async () => {
+  it("should filter products by category", async () => {
     const res = await request(app)
-      .get("/products")
+      .get("/api/products?category=electronics")
       .set("Authorization", "Bearer test-token");
-    expect(res.body.products).toEqual([]);
+    expect(res.statusCode).toBe(200);
+    expect(res.body.length).toBe(2);
+    res.body.forEach((product) => {
+      expect(product.category).toBe("electronics");
+    });
   });
-});
 
-describe("GET /products/:id", () => {
-  it("should return 401 without auth token", async () => {
-    const res = await request(app).get("/products/1");
+  it("should filter products by category case-insensitively (all caps)", async () => {
+    const res = await request(app)
+      .get("/api/products?category=ELECTRONICS")
+      .set("Authorization", "Bearer test-token");
+    expect(res.statusCode).toBe(200);
+    expect(res.body.length).toBe(2);
+    res.body.forEach((product) => {
+      expect(product.category).toBe("electronics");
+    });
+  });
+
+  it("should filter products by category case-insensitively (mixed case)", async () => {
+    const res = await request(app)
+      .get("/api/products?category=Books")
+      .set("Authorization", "Bearer test-token");
+    expect(res.statusCode).toBe(200);
+    expect(res.body.length).toBe(2);
+    res.body.forEach((product) => {
+      expect(product.category).toBe("books");
+    });
+  });
+
+  it("should return empty array for non-existent category", async () => {
+    const res = await request(app)
+      .get("/api/products?category=toys")
+      .set("Authorization", "Bearer test-token");
+    expect(res.statusCode).toBe(200);
+    expect(res.body).toEqual([]);
+  });
+
+  it("should return empty array for invalid category", async () => {
+    const res = await request(app)
+      .get("/api/products?category=xyz123")
+      .set("Authorization", "Bearer test-token");
+    expect(res.statusCode).toBe(200);
+    expect(res.body).toEqual([]);
+  });
+
+  it("should require authentication", async () => {
+    const res = await request(app).get("/api/products");
     expect(res.statusCode).toBe(401);
   });
 
-  it("should return 200 with auth token", async () => {
+  it("should return products with correct shape", async () => {
     const res = await request(app)
-      .get("/products/1")
+      .get("/api/products")
       .set("Authorization", "Bearer test-token");
     expect(res.statusCode).toBe(200);
-  });
-
-  it("should return the product with the given id", async () => {
-    const res = await request(app)
-      .get("/products/42")
-      .set("Authorization", "Bearer test-token");
-    expect(res.body.id).toBe("42");
-    expect(res.body.name).toBe("Sample Product");
+    res.body.forEach((product) => {
+      expect(product).toHaveProperty("id");
+      expect(product).toHaveProperty("name");
+      expect(product).toHaveProperty("price");
+      expect(product).toHaveProperty("category");
+      expect(product).toHaveProperty("inStock");
+    });
   });
 });
