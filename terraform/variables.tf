@@ -19,3 +19,14 @@ variable "node_version" {
   type        = string
   default     = "20-lts"
 }
+
+variable "environment" {
+  description = "The deployment environment (e.g., dev, staging, production)."
+  type        = string
+  default     = "dev"
+}
+
+variable "project" {
+  description = "The project name used for resource tagging."
+  type        = string
+}
