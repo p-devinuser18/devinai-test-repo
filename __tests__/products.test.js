@@ -64,6 +64,17 @@ describe("GET /api/products", () => {
     expect(res.body.length).toBe(0);
   });
 
+  it("should handle duplicate category query params without crashing", async () => {
+    const res = await request(app).get(
+      "/api/products?category=electronics&category=sports",
+    );
+    expect(res.statusCode).toBe(200);
+    expect(Array.isArray(res.body)).toBe(true);
+    res.body.forEach((product) => {
+      expect(product.category).toBe("electronics");
+    });
+  });
+
   it("should return empty array for invalid category", async () => {
     const res = await request(app).get("/api/products?category=!!!invalid");
     expect(res.statusCode).toBe(200);
