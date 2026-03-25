@@ -8,6 +8,7 @@ const mockWeatherResponse = {
 };
 
 beforeEach(() => {
+  process.env.WEATHER_API_KEY = "test-api-key";
   jest.restoreAllMocks();
 });
 
@@ -30,6 +31,11 @@ describe("GET /api/weather/:city", () => {
       description: "scattered clouds",
       humidity: 72,
     });
+    expect(global.fetch).toHaveBeenCalledTimes(1);
+    expect(global.fetch).toHaveBeenCalledWith(
+      expect.stringContaining("q=London"),
+      expect.objectContaining({ signal: expect.any(AbortSignal) })
+    );
   });
 
   it("should return 404 when city is not found", async () => {
@@ -75,6 +81,34 @@ describe("GET /api/weather/:city", () => {
 
     expect(res.statusCode).toBe(502);
     expect(res.body).toEqual({ error: "Weather service unavailable" });
+  });
+
+  it("should return 502 when fetch throws a network error", async () => {
+    jest.spyOn(global, "fetch").mockRejectedValue(new Error("network error"));
+
+    const res = await request(app)
+      .get("/api/weather/London")
+      .set("Authorization", "Bearer test-token");
+
+    expect(res.statusCode).toBe(502);
+    expect(res.body).toEqual({ error: "Weather service unavailable" });
+  });
+
+  it("should use WEATHER_API_KEY from environment", async () => {
+    jest.spyOn(global, "fetch").mockResolvedValue({
+      ok: true,
+      status: 200,
+      json: async () => mockWeatherResponse,
+    });
+
+    await request(app)
+      .get("/api/weather/London")
+      .set("Authorization", "Bearer test-token");
+
+    expect(global.fetch).toHaveBeenCalledWith(
+      expect.stringContaining("appid=test-api-key"),
+      expect.any(Object)
+    );
   });
 
   it("should require authentication", async () => {

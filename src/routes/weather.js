@@ -35,7 +35,7 @@ router.get("/:city", async (req, res) => {
       humidity: data.main.humidity,
     });
   } catch (err) {
-    if (err.name === "AbortError") {
+    if (err.name === "AbortError" || err.name === "TimeoutError") {
       return res.status(502).json({ error: "Weather service unavailable" });
     }
     return res.status(502).json({ error: "Weather service unavailable" });
