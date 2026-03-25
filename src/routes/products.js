@@ -1,6 +1,7 @@
 const express = require("express");
+const path = require("path");
 const router = express.Router();
-const products = require("../data/products.json");
+const products = require(path.join(__dirname, "../data/products.json"));
 
 router.get("/", (req, res) => {
   const category = req.query.category;
