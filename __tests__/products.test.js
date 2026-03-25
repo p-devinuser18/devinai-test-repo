@@ -1,64 +1,89 @@
-const request = require('supertest');
-const app = require('../src/app');
-const products = require('../src/data/products.json');
+const request = require("supertest");
+const app = require("../src/app");
+const products = require("../src/data/products.json");
 
-describe('GET /api/products', () => {
-  it('should return all products when no category filter is provided', async () => {
-    const res = await request(app).get('/api/products');
+describe("GET /api/products", () => {
+  it("should return all products when no category filter is provided", async () => {
+    const res = await request(app)
+      .get("/api/products")
+      .set("Authorization", "Bearer test-token");
     expect(res.statusCode).toBe(200);
-    expect(res.headers['content-type']).toMatch(/json/);
-    expect(Array.isArray(res.body)).toBe(true);
-    expect(res.body.length).toBe(products.length);
+    expect(res.body).toEqual(products);
+    expect(res.body.length).toBe(6);
+  });
+
+  it("should return JSON content type", async () => {
+    const res = await request(app)
+      .get("/api/products")
+      .set("Authorization", "Bearer test-token");
+    expect(res.headers["content-type"]).toMatch(/json/);
+  });
+
+  it("should filter products by category", async () => {
+    const res = await request(app)
+      .get("/api/products?category=electronics")
+      .set("Authorization", "Bearer test-token");
+    expect(res.statusCode).toBe(200);
+    expect(res.body.length).toBe(2);
     res.body.forEach((product) => {
-      expect(product).toHaveProperty('id');
-      expect(product).toHaveProperty('name');
-      expect(product).toHaveProperty('price');
-      expect(product).toHaveProperty('category');
-      expect(product).toHaveProperty('inStock');
+      expect(product.category).toBe("electronics");
     });
   });
 
-  it('should filter products by category (case-insensitive)', async () => {
-    const res = await request(app).get('/api/products?category=Electronics');
+  it("should filter products by category case-insensitively (all caps)", async () => {
+    const res = await request(app)
+      .get("/api/products?category=ELECTRONICS")
+      .set("Authorization", "Bearer test-token");
     expect(res.statusCode).toBe(200);
-    expect(Array.isArray(res.body)).toBe(true);
-    expect(res.body.length).toBeGreaterThan(0);
+    expect(res.body.length).toBe(2);
     res.body.forEach((product) => {
-      expect(product.category.toLowerCase()).toBe('electronics');
+      expect(product.category).toBe("electronics");
     });
   });
 
-  it('should return empty array when no products match the category', async () => {
-    const res = await request(app).get('/api/products?category=nonexistent');
+  it("should filter products by category case-insensitively (mixed case)", async () => {
+    const res = await request(app)
+      .get("/api/products?category=Books")
+      .set("Authorization", "Bearer test-token");
     expect(res.statusCode).toBe(200);
-    expect(Array.isArray(res.body)).toBe(true);
-    expect(res.body.length).toBe(0);
-  });
-
-  it('should return empty array for an invalid category', async () => {
-    const res = await request(app).get('/api/products?category=foobar123');
-    expect(res.statusCode).toBe(200);
-    expect(Array.isArray(res.body)).toBe(true);
-    expect(res.body.length).toBe(0);
-  });
-
-  it('should handle lowercase category filter', async () => {
-    const res = await request(app).get('/api/products?category=sports');
-    expect(res.statusCode).toBe(200);
-    expect(Array.isArray(res.body)).toBe(true);
-    expect(res.body.length).toBeGreaterThan(0);
+    expect(res.body.length).toBe(2);
     res.body.forEach((product) => {
-      expect(product.category.toLowerCase()).toBe('sports');
+      expect(product.category).toBe("books");
     });
   });
 
-  it('should handle uppercase category filter', async () => {
-    const res = await request(app).get('/api/products?category=KITCHEN');
+  it("should return empty array for non-existent category", async () => {
+    const res = await request(app)
+      .get("/api/products?category=toys")
+      .set("Authorization", "Bearer test-token");
     expect(res.statusCode).toBe(200);
-    expect(Array.isArray(res.body)).toBe(true);
-    expect(res.body.length).toBeGreaterThan(0);
+    expect(res.body).toEqual([]);
+  });
+
+  it("should return empty array for invalid category", async () => {
+    const res = await request(app)
+      .get("/api/products?category=xyz123")
+      .set("Authorization", "Bearer test-token");
+    expect(res.statusCode).toBe(200);
+    expect(res.body).toEqual([]);
+  });
+
+  it("should require authentication", async () => {
+    const res = await request(app).get("/api/products");
+    expect(res.statusCode).toBe(401);
+  });
+
+  it("should return products with correct shape", async () => {
+    const res = await request(app)
+      .get("/api/products")
+      .set("Authorization", "Bearer test-token");
+    expect(res.statusCode).toBe(200);
     res.body.forEach((product) => {
-      expect(product.category.toLowerCase()).toBe('kitchen');
+      expect(product).toHaveProperty("id");
+      expect(product).toHaveProperty("name");
+      expect(product).toHaveProperty("price");
+      expect(product).toHaveProperty("category");
+      expect(product).toHaveProperty("inStock");
     });
   });
 });
