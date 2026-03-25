@@ -47,6 +47,16 @@ describe("GET /api/products", () => {
     });
   });
 
+  it("should filter products by sanitary category", async () => {
+    const res = await request(app).get("/api/products?category=sanitary");
+    expect(res.statusCode).toBe(200);
+    expect(Array.isArray(res.body)).toBe(true);
+    expect(res.body.length).toBe(2);
+    res.body.forEach((product) => {
+      expect(product.category).toBe("sanitary");
+    });
+  });
+
   it("should return empty array for non-matching category", async () => {
     const res = await request(app).get("/api/products?category=nonexistent");
     expect(res.statusCode).toBe(200);

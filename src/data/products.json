@@ -40,5 +40,19 @@
     "price": 24.99,
     "category": "home",
     "inStock": true
+  },
+  {
+    "id": 7,
+    "name": "Hand Sanitizer",
+    "price": 5.99,
+    "category": "sanitary",
+    "inStock": true
+  },
+  {
+    "id": 8,
+    "name": "Disinfectant Wipes",
+    "price": 8.49,
+    "category": "sanitary",
+    "inStock": true
   }
 ]
