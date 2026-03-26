@@ -15,6 +15,6 @@ app.use("/health", healthRouter);
 // Protected routes
 app.use("/users", auth, usersRouter);
 app.use("/api/products", auth, productsRouter);
-app.use("/api/weather", weatherRouter);
+app.use("/api/weather", auth, weatherRouter);
 
 module.exports = app;
