@@ -32,7 +32,7 @@ jobs:
       - name: "Security: Secret Scanning"
         run: |
           echo "Scanning for hardcoded secrets in src/..."
-          if grep -rEn '(apikey|api_key|password|secret|token)\s*[=:]' src/ \
+          if grep -rEin '(apikey|api_key|password|secret|token)\s*[=:]' src/ \
             --include='*.js' --include='*.ts' --include='*.jsx' --include='*.tsx' --include='*.json' --include='*.yml' --include='*.yaml' \
             --exclude='.env.example' --exclude='package-lock.json' \
             --exclude-dir='node_modules'; then
