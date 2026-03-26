@@ -1,14 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const fs = require("fs");
-const path = require("path");
+const products = require("../data/products.json");
 
-router.get("/", async (req, res) => {
-  const data = await fs.promises.readFile(
-    path.join(__dirname, "../data/products.json"),
-    "utf-8"
-  );
-  const products = JSON.parse(data);
+router.get("/", (req, res) => {
   const category = req.query.category;
   const filtered = category
     ? products.filter(
