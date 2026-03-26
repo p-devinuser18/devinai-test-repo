@@ -4,6 +4,7 @@ const usersRouter = require("./routes/users");
 const productsRouter = require("./routes/products");
 const weatherRouter = require("./routes/weather");
 const healthRouter = require("./routes/health");
+const statsRouter = require("./routes/stats");
 
 const app = express();
 
@@ -16,5 +17,6 @@ app.use("/health", healthRouter);
 app.use("/users", auth, usersRouter);
 app.use("/api/products", auth, productsRouter);
 app.use("/api/weather", weatherRouter);
+app.use("/api/stats", auth, statsRouter);
 
 module.exports = app;
