@@ -3,6 +3,7 @@ const auth = require("./middleware/auth");
 const usersRouter = require("./routes/users");
 const productsRouter = require("./routes/products");
 const healthRouter = require("./routes/health");
+const statsRouter = require("./routes/stats");
 
 const app = express();
 
@@ -14,5 +15,6 @@ app.use("/health", healthRouter);
 // Protected routes
 app.use("/users", auth, usersRouter);
 app.use("/api/products", auth, productsRouter);
+app.use("/api/stats", statsRouter);
 
 module.exports = app;

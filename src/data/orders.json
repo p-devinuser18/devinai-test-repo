@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "productId": 1,
+    "quantity": 2,
+    "status": "pending"
+  },
+  {
+    "id": 2,
+    "productId": 3,
+    "quantity": 1,
+    "status": "shipped"
+  },
+  {
+    "id": 3,
+    "productId": 5,
+    "quantity": 3,
+    "status": "delivered"
+  },
+  {
+    "id": 4,
+    "productId": 2,
+    "quantity": 1,
+    "status": "pending"
+  },
+  {
+    "id": 5,
+    "productId": 4,
+    "quantity": 2,
+    "status": "delivered"
+  }
+]
