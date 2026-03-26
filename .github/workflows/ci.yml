@@ -25,3 +25,21 @@ jobs:
 
       - name: Run tests
         run: npm test
+
+      - name: Smoke test products endpoint
+        run: |
+          node src/server.js &
+          SERVER_PID=$!
+          sleep 3
+          STATUS=$(curl -s -o /tmp/smoke-response.json -w "%{http_code}" -H "Authorization: Bearer ci-token" http://localhost:3000/api/products)
+          kill $SERVER_PID || true
+          if [ "$STATUS" != "200" ]; then
+            echo "Smoke test failed: expected HTTP 200 but got $STATUS"
+            cat /tmp/smoke-response.json
+            exit 1
+          fi
+          node -e "
+            const data = require('/tmp/smoke-response.json');
+            if (!Array.isArray(data)) { console.error('Expected JSON array'); process.exit(1); }
+            console.log('Smoke test passed: received', data.length, 'products');
+          "

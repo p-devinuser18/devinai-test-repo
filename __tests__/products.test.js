@@ -86,4 +86,31 @@ describe("GET /api/products", () => {
       expect(product).toHaveProperty("inStock");
     });
   });
+
+  it("should respond within 500ms", async () => {
+    const start = Date.now();
+    const res = await request(app)
+      .get("/api/products")
+      .set("Authorization", "Bearer test-token");
+    const elapsed = Date.now() - start;
+    expect(res.statusCode).toBe(200);
+    expect(elapsed).toBeLessThan(500);
+  });
+
+  it("should return a valid JSON array", async () => {
+    const res = await request(app)
+      .get("/api/products")
+      .set("Authorization", "Bearer test-token");
+    expect(res.statusCode).toBe(200);
+    expect(Array.isArray(res.body)).toBe(true);
+    expect(res.body.length).toBeGreaterThan(0);
+  });
+
+  it("should return application/json content-type", async () => {
+    const res = await request(app)
+      .get("/api/products")
+      .set("Authorization", "Bearer test-token");
+    expect(res.statusCode).toBe(200);
+    expect(res.headers["content-type"]).toMatch(/application\/json/);
+  });
 });
