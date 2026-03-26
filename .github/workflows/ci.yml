@@ -25,3 +25,23 @@ jobs:
 
       - name: Run tests
         run: npm test
+
+      - name: "Security: Dependency Audit"
+        run: npm audit --audit-level=high
+
+      - name: "Security: Secret Scanning"
+        run: |
+          echo "Scanning for hardcoded secrets in src/..."
+          if grep -rEin '(apikey|api_key|password|secret|token)\s*[=:]\s*.+' src/ \
+            --include='*.js' --include='*.ts' --include='*.jsx' --include='*.tsx' --include='*.json' --include='*.yml' --include='*.yaml' \
+            --exclude='*.env.example' \
+            --exclude='package-lock.json' \
+            --exclude-dir='node_modules'; then
+            echo "::error::Potential secrets found in source code!"
+            exit 1
+          else
+            echo "No hardcoded secrets detected."
+          fi
+
+      - name: "Security: License Check"
+        run: npx license-checker --production --failOn 'GPL'
