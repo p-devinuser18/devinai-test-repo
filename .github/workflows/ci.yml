@@ -25,3 +25,32 @@ jobs:
 
       - name: Run tests
         run: npm test
+
+      - name: Smoke test - verify products endpoint
+        run: |
+          node -e "
+            const app = require('./src/app');
+            const server = app.listen(0, async () => {
+              const port = server.address().port;
+              try {
+                const res = await fetch('http://localhost:' + port + '/api/products', {
+                  headers: { 'Authorization': 'Bearer test-token' }
+                });
+                if (res.status !== 200) {
+                  console.error('Expected 200, got ' + res.status);
+                  process.exit(1);
+                }
+                const body = await res.json();
+                if (!Array.isArray(body)) {
+                  console.error('Expected JSON array, got ' + typeof body);
+                  process.exit(1);
+                }
+                console.log('Smoke test passed: status 200, JSON array with ' + body.length + ' items');
+              } catch (err) {
+                console.error('Smoke test failed:', err.message);
+                process.exit(1);
+              } finally {
+                server.close();
+              }
+            });
+          "
