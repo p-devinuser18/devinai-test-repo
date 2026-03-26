@@ -54,7 +54,7 @@ None.
 
 ## GET /health/ready
 
-Readiness probe endpoint. Indicates whether the service is ready to accept traffic. No authentication required.
+Readiness probe endpoint. Verifies that required data files are accessible before accepting traffic. No authentication required.
 
 - **Method:** `GET`
 - **Path:** `/health/ready`
@@ -66,24 +66,29 @@ None.
 
 ### Response Shape
 
-| Field   | Type   | Description                          |
-| ------- | ------ | ------------------------------------ |
-| `ready` | boolean | Whether the service is ready        |
+| Field    | Type   | Description                                                    |
+| -------- | ------ | -------------------------------------------------------------- |
+| `status` | string | `"ready"` if all checks pass, `"not ready"` otherwise         |
+| `checks` | object | Key-value pairs of subsystem names to their status (`"ok"` or `"fail"`) |
 
 ### Example Response
 
 ```json
 {
-  "ready": true
+  "status": "ready",
+  "checks": {
+    "products": "ok",
+    "orders": "ok"
+  }
 }
 ```
 
 ### Error Codes
 
-| Status | Description                        |
-| ------ | ---------------------------------- |
-| `200`  | Service is ready                   |
-| `503`  | Service is not ready               |
+| Status | Description                         |
+| ------ | ----------------------------------- |
+| `200`  | All readiness checks passed         |
+| `503`  | One or more readiness checks failed |
 
 ---
 
@@ -214,78 +219,42 @@ None.
 
 ## GET /api/dashboard
 
-Aggregated dashboard endpoint. Returns a combined summary of health status, product statistics, and weather data in a single response.
+Returns an aggregated summary of the product catalog, including totals and a breakdown by category. No authentication required.
 
 - **Method:** `GET`
 - **Path:** `/api/dashboard`
-- **Authentication:** Bearer token (`Authorization` header)
+- **Authentication:** None
 
 ### Query Parameters
 
-| Parameter | Type   | Required | Description                                  |
-| --------- | ------ | -------- | -------------------------------------------- |
-| `city`    | string | No       | City name for weather summary (default: none)|
+None.
 
 ### Response Shape
 
-| Field               | Type   | Description                              |
-| ------------------- | ------ | ---------------------------------------- |
-| `health`            | object | Current health status                    |
-| `health.status`     | string | Server status (`"ok"`)                   |
-| `health.uptime`     | number | Seconds since the server started         |
-| `health.version`    | string | Application version                      |
-| `products`          | object | Product statistics                       |
-| `products.total`    | number | Total number of products                 |
-| `products.inStock`  | number | Number of products currently in stock    |
-| `weather`           | object \| null | Weather summary (null if `city` not provided) |
-| `weather.city`      | string | Resolved city name                       |
-| `weather.temperature` | number | Temperature in Celsius                 |
-| `weather.description` | string | Weather condition description          |
-| `weather.humidity`  | number | Humidity percentage                      |
+| Field                | Type   | Description                                         |
+| -------------------- | ------ | --------------------------------------------------- |
+| `totalProducts`      | number | Total number of products                            |
+| `totalCategories`    | number | Number of distinct product categories               |
+| `productsByCategory` | object | Key-value pairs of category name to product count   |
+| `timestamp`          | string | ISO 8601 timestamp of when the response was generated |
 
 ### Example Response
 
 ```json
 {
-  "health": {
-    "status": "ok",
-    "uptime": 456,
-    "version": "1.0.0"
+  "totalProducts": 6,
+  "totalCategories": 3,
+  "productsByCategory": {
+    "electronics": 2,
+    "books": 2,
+    "clothing": 2
   },
-  "products": {
-    "total": 6,
-    "inStock": 5
-  },
-  "weather": {
-    "city": "London",
-    "temperature": 15.2,
-    "description": "scattered clouds",
-    "humidity": 72
-  }
-}
-```
-
-**Without `city` parameter:**
-
-```json
-{
-  "health": {
-    "status": "ok",
-    "uptime": 456,
-    "version": "1.0.0"
-  },
-  "products": {
-    "total": 6,
-    "inStock": 5
-  },
-  "weather": null
+  "timestamp": "2026-03-26T12:00:00.000Z"
 }
 ```
 
 ### Error Codes
 
-| Status | Description                              |
-| ------ | ---------------------------------------- |
-| `200`  | Success                                  |
-| `401`  | Missing or invalid `Authorization` header|
-| `502`  | Weather service unavailable (if `city` provided) |
+| Status | Description |
+| ------ | ----------- |
+| `200`  | Success     |
