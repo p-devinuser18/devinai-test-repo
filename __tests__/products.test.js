@@ -52,6 +52,22 @@ describe("GET /api/products", () => {
     });
   });
 
+  it("should return same results regardless of category case", async () => {
+    const [lower, upper, mixed] = await Promise.all([
+      request(app)
+        .get("/api/products?category=electronics")
+        .set("Authorization", "Bearer test-token"),
+      request(app)
+        .get("/api/products?category=ELECTRONICS")
+        .set("Authorization", "Bearer test-token"),
+      request(app)
+        .get("/api/products?category=Electronics")
+        .set("Authorization", "Bearer test-token"),
+    ]);
+    expect(lower.body).toEqual(upper.body);
+    expect(lower.body).toEqual(mixed.body);
+  });
+
   it("should return empty array for non-existent category", async () => {
     const res = await request(app)
       .get("/api/products?category=toys")
