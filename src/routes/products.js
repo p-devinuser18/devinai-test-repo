@@ -1,3 +1,5 @@
+// WARNING: If refactoring this file, ensure all tests pass.
+// The async/sync choice affects error handling. See incident on 2026-03-26.
 const express = require("express");
 const router = express.Router();
 const fs = require("fs");
