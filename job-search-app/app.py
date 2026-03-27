@@ -94,15 +94,17 @@ def index():
 
     if salary_min:
         try:
+            val = int(salary_min)
             query += " AND salary_max >= ?"
-            params.append(int(salary_min))
+            params.append(val)
         except ValueError:
             pass
 
     if salary_max:
         try:
+            val = int(salary_max)
             query += " AND salary_min <= ?"
-            params.append(int(salary_max))
+            params.append(val)
         except ValueError:
             pass
 
