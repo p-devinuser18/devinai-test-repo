@@ -36,16 +36,7 @@
             <select id="location" name="location">
               <option value="">All Locations</option>
               {% for loc in locations %}
-              <option
-                value="{{ loc }}"
-                {%
-                if
-                loc=""
-                ="selected_location"
-                %}selected{%
-                endif
-                %}
-              >
+              <option value="{{ loc }}" {% if loc == selected_location %}selected{% endif %}>
                 {{ loc }}
               </option>
               {% endfor %}
@@ -56,40 +47,13 @@
             <label for="experience">Experience Level</label>
             <select id="experience" name="experience">
               <option value="">All Levels</option>
-              <option
-                value="Junior"
-                {%
-                if
-                selected_experience=""
-                ="Junior"
-                %}selected{%
-                endif
-                %}
-              >
+              <option value="Junior" {% if selected_experience == 'Junior' %}selected{% endif %}>
                 Junior
               </option>
-              <option
-                value="Mid"
-                {%
-                if
-                selected_experience=""
-                ="Mid"
-                %}selected{%
-                endif
-                %}
-              >
+              <option value="Mid" {% if selected_experience == 'Mid' %}selected{% endif %}>
                 Mid
               </option>
-              <option
-                value="Senior"
-                {%
-                if
-                selected_experience=""
-                ="Senior"
-                %}selected{%
-                endif
-                %}
-              >
+              <option value="Senior" {% if selected_experience == 'Senior' %}selected{% endif %}>
                 Senior
               </option>
             </select>
@@ -128,10 +92,7 @@
 
       <div class="results-header">
         <h2>Job Results</h2>
-        <span class="results-count"
-          >{{ jobs|length }} job{{ 's' if jobs|length != 1 else '' }}
-          found</span
-        >
+        <span class="results-count">{{ jobs|length }} job{{ 's' if jobs|length != 1 else '' }} found</span>
       </div>
 
       {% if jobs %}
@@ -143,9 +104,7 @@
             <div class="company">{{ job['company'] }}</div>
             <div class="job-meta">
               <span>{{ job['location'] }}</span>
-              <span class="experience-badge {{ job['experience']|lower }}"
-                >{{ job['experience'] }}</span
-              >
+              <span class="experience-badge {{ job['experience']|lower }}">{{ job['experience'] }}</span>
             </div>
           </div>
           <div class="job-salary">

@@ -93,12 +93,18 @@ def index():
         params.append(f"%{location}%")
 
     if salary_min:
-        query += " AND salary_max >= ?"
-        params.append(int(salary_min))
+        try:
+            query += " AND salary_max >= ?"
+            params.append(int(salary_min))
+        except ValueError:
+            pass
 
     if salary_max:
-        query += " AND salary_min <= ?"
-        params.append(int(salary_max))
+        try:
+            query += " AND salary_min <= ?"
+            params.append(int(salary_max))
+        except ValueError:
+            pass
 
     if experience:
         query += " AND experience = ?"
@@ -127,6 +133,7 @@ def index():
     )
 
 
+init_db()
+
 if __name__ == "__main__":
-    init_db()
     app.run(debug=True, port=5000)
