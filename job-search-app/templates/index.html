@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Job Search</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <h1>Job Search</h1>
+        <p>Find your next opportunity</p>
+      </div>
+    </header>
+
+    <main class="container">
+      <form class="search-form" method="GET" action="/">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="keyword">Job Title / Keyword</label>
+            <input
+              type="text"
+              id="keyword"
+              name="keyword"
+              placeholder="e.g. Software Engineer"
+              value="{{ keyword }}"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="location">Location</label>
+            <select id="location" name="location">
+              <option value="">All Locations</option>
+              {% for loc in locations %}
+              <option
+                value="{{ loc }}"
+                {%
+                if
+                loc=""
+                ="selected_location"
+                %}selected{%
+                endif
+                %}
+              >
+                {{ loc }}
+              </option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="experience">Experience Level</label>
+            <select id="experience" name="experience">
+              <option value="">All Levels</option>
+              <option
+                value="Junior"
+                {%
+                if
+                selected_experience=""
+                ="Junior"
+                %}selected{%
+                endif
+                %}
+              >
+                Junior
+              </option>
+              <option
+                value="Mid"
+                {%
+                if
+                selected_experience=""
+                ="Mid"
+                %}selected{%
+                endif
+                %}
+              >
+                Mid
+              </option>
+              <option
+                value="Senior"
+                {%
+                if
+                selected_experience=""
+                ="Senior"
+                %}selected{%
+                endif
+                %}
+              >
+                Senior
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row" style="margin-top: 16px">
+          <div class="form-group">
+            <label for="salary_min">Min Salary ($)</label>
+            <input
+              type="number"
+              id="salary_min"
+              name="salary_min"
+              placeholder="e.g. 80000"
+              value="{{ salary_min }}"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="salary_max">Max Salary ($)</label>
+            <input
+              type="number"
+              id="salary_max"
+              name="salary_max"
+              placeholder="e.g. 200000"
+              value="{{ salary_max }}"
+            />
+          </div>
+
+          <div class="form-group" style="display: flex; gap: 10px">
+            <button type="submit" class="btn-search">Search</button>
+            <a href="/" class="btn-clear">Clear</a>
+          </div>
+        </div>
+      </form>
+
+      <div class="results-header">
+        <h2>Job Results</h2>
+        <span class="results-count"
+          >{{ jobs|length }} job{{ 's' if jobs|length != 1 else '' }}
+          found</span
+        >
+      </div>
+
+      {% if jobs %}
+      <div class="job-list">
+        {% for job in jobs %}
+        <div class="job-card">
+          <div class="job-info">
+            <h3>{{ job['title'] }}</h3>
+            <div class="company">{{ job['company'] }}</div>
+            <div class="job-meta">
+              <span>{{ job['location'] }}</span>
+              <span class="experience-badge {{ job['experience']|lower }}"
+                >{{ job['experience'] }}</span
+              >
+            </div>
+          </div>
+          <div class="job-salary">
+            ${{ "{:,}".format(job['salary_min']) }} &ndash; ${{
+            "{:,}".format(job['salary_max']) }}
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      {% else %}
+      <div class="no-results">
+        <h3>No jobs found</h3>
+        <p>Try adjusting your search filters.</p>
+      </div>
+      {% endif %}
+    </main>
+
+    <footer>
+      <p>Job Search App &copy; 2026</p>
+    </footer>
+  </body>
+</html>
