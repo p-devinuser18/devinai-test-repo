@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "name": "Alice Johnson",
+    "email": "alice.johnson@example.com",
+    "avatarUrl": "https://api.dicebear.com/7.x/avataaars/svg?seed=alice",
+    "joinDate": "2023-01-15T08:30:00Z"
+  },
+  {
+    "id": 2,
+    "name": "Bob Smith",
+    "email": "bob.smith@example.com",
+    "avatarUrl": "https://api.dicebear.com/7.x/avataaars/svg?seed=bob",
+    "joinDate": "2023-03-22T14:45:00Z"
+  },
+  {
+    "id": 3,
+    "name": "Charlie Davis",
+    "email": "charlie.davis@example.com",
+    "avatarUrl": "https://api.dicebear.com/7.x/avataaars/svg?seed=charlie",
+    "joinDate": "2023-06-10T11:00:00Z"
+  },
+  {
+    "id": 4,
+    "name": "Diana Lee",
+    "email": "diana.lee@example.com",
+    "avatarUrl": "https://api.dicebear.com/7.x/avataaars/svg?seed=diana",
+    "joinDate": "2024-01-05T09:15:00Z"
+  },
+  {
+    "id": 5,
+    "name": "Ethan Brown",
+    "email": "ethan.brown@example.com",
+    "avatarUrl": "https://api.dicebear.com/7.x/avataaars/svg?seed=ethan",
+    "joinDate": "2024-04-18T16:30:00Z"
+  }
+]
