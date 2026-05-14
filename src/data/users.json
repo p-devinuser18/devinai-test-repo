@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "name": "Alice Johnson",
+    "email": "alice@example.com",
+    "avatar": "https://api.example.com/avatars/alice.png",
+    "joinDate": "2023-01-15T08:00:00Z"
+  },
+  {
+    "id": 2,
+    "name": "Bob Smith",
+    "email": "bob@example.com",
+    "avatar": "https://api.example.com/avatars/bob.png",
+    "joinDate": "2023-03-22T14:30:00Z"
+  },
+  {
+    "id": 3,
+    "name": "Carol Williams",
+    "email": "carol@example.com",
+    "avatar": "https://api.example.com/avatars/carol.png",
+    "joinDate": "2023-06-10T10:15:00Z"
+  }
+]

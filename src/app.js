@@ -1,14 +1,27 @@
 const express = require("express");
 const auth = require("./middleware/auth");
 const usersRouter = require("./routes/users");
-const productsRouter = require("./routes/products");
+const healthRouter = require("./routes/health");
+const profileRouter = require("./routes/profile");
+
+let productsRouter;
+try {
+  productsRouter = require("./routes/products");
+} catch (err) {
+  console.error("Failed to load products router:", err.message);
+  productsRouter = express.Router();
+}
 
 const app = express();
 
 app.use(express.json());
 
+// Health endpoint — no auth middleware
+app.use("/health", healthRouter);
+
 // Protected routes
 app.use("/users", auth, usersRouter);
 app.use("/api/products", auth, productsRouter);
+app.use("/api/profile", auth, profileRouter);
 
 module.exports = app;
