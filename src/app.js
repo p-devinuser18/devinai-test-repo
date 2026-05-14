@@ -2,6 +2,7 @@ const express = require("express");
 const auth = require("./middleware/auth");
 const usersRouter = require("./routes/users");
 const healthRouter = require("./routes/health");
+const profileRouter = require("./routes/profile");
 
 let productsRouter;
 try {
@@ -21,5 +22,6 @@ app.use("/health", healthRouter);
 // Protected routes
 app.use("/users", auth, usersRouter);
 app.use("/api/products", auth, productsRouter);
+app.use("/api/profile", auth, profileRouter);
 
 module.exports = app;
