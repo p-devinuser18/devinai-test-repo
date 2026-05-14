@@ -4,6 +4,7 @@ const usersRouter = require("./routes/users");
 const productsRouter = require("./routes/products");
 const weatherRouter = require("./routes/weather");
 const healthRouter = require("./routes/health");
+const productsSalesRouter = require("./routes/products-sales");
 
 const app = express();
 
@@ -14,6 +15,7 @@ app.use("/health", healthRouter);
 
 // Protected routes
 app.use("/users", auth, usersRouter);
+app.use("/api/products/sales", auth, productsSalesRouter);
 app.use("/api/products", auth, productsRouter);
 app.use("/api/weather", weatherRouter);
 
