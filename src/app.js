@@ -6,7 +6,8 @@ const healthRouter = require("./routes/health");
 let productsRouter;
 try {
   productsRouter = require("./routes/products");
-} catch {
+} catch (err) {
+  console.error("Failed to load products router:", err.message);
   productsRouter = express.Router();
 }
 
