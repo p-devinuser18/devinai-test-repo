@@ -9,13 +9,8 @@ router.get("/", async (req, res) => {
     "utf-8"
   );
   const products = JSON.parse(data);
-  const category = req.query.category;
-  const filtered = category
-    ? products.filter(
-        (p) => p.category.toLowerCase() === category.toLowerCase()
-      )
-    : products;
-  res.json(filtered);
+  const categories = [...new Set(products.map((p) => p.category))].sort();
+  res.json(categories);
 });
 
 module.exports = router;
