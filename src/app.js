@@ -2,6 +2,7 @@ const express = require("express");
 const auth = require("./middleware/auth");
 const usersRouter = require("./routes/users");
 const productsRouter = require("./routes/products");
+const ordersRouter = require("./routes/orders");
 const weatherRouter = require("./routes/weather");
 const healthRouter = require("./routes/health");
 
@@ -15,6 +16,7 @@ app.use("/health", healthRouter);
 // Protected routes
 app.use("/users", auth, usersRouter);
 app.use("/api/products", auth, productsRouter);
+app.use("/api/orders", auth, ordersRouter);
 app.use("/api/weather", weatherRouter);
 
 module.exports = app;
