@@ -66,4 +66,26 @@ describe('GET /api/products - integration tests', () => {
     const res = await request(app).get('/api/products').set(AUTH_HEADER);
     expect(res.headers['content-type']).toMatch(/application\/json/);
   });
+
+  it('should return a count matching products.json', async () => {
+    const res = await request(app).get('/api/products').set(AUTH_HEADER);
+    expect(res.statusCode).toBe(200);
+    expect(res.body.length).toBe(products.length);
+  });
+
+  it('should have boolean inStock values for all products', async () => {
+    const res = await request(app).get('/api/products').set(AUTH_HEADER);
+    expect(res.statusCode).toBe(200);
+    res.body.forEach((product) => {
+      expect(typeof product.inStock).toBe('boolean');
+    });
+  });
+
+  it('should respond in less than 200ms', async () => {
+    const start = Date.now();
+    const res = await request(app).get('/api/products').set(AUTH_HEADER);
+    const elapsed = Date.now() - start;
+    expect(res.statusCode).toBe(200);
+    expect(elapsed).toBeLessThan(200);
+  });
 });
