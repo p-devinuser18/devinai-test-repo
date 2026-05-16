@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "productId": 1,
+    "quantity": 2,
+    "customerName": "Alice Johnson",
+    "status": "shipped",
+    "total": 159.98,
+    "createdAt": "2025-01-15T10:30:00Z"
+  },
+  {
+    "id": 2,
+    "productId": 3,
+    "quantity": 1,
+    "customerName": "Bob Smith",
+    "status": "pending",
+    "total": 29.99,
+    "createdAt": "2025-02-20T14:00:00Z"
+  },
+  {
+    "id": 3,
+    "productId": 5,
+    "quantity": 3,
+    "customerName": "Carol Davis",
+    "status": "delivered",
+    "total": 59.97,
+    "createdAt": "2025-03-10T09:15:00Z"
+  },
+  {
+    "id": 4,
+    "productId": 2,
+    "quantity": 1,
+    "customerName": "Alice Johnson",
+    "status": "pending",
+    "total": 24.99,
+    "createdAt": "2025-04-05T16:45:00Z"
+  },
+  {
+    "id": 5,
+    "productId": 6,
+    "quantity": 2,
+    "customerName": "Dave Wilson",
+    "status": "cancelled",
+    "total": 99.98,
+    "createdAt": "2025-05-01T11:00:00Z"
+  }
+]
