@@ -84,4 +84,35 @@ describe("GET /api/products/sales - integration tests", () => {
       .set(VALID_COUNTRY);
     expect(res.headers["content-type"]).toMatch(/application\/json/);
   });
+
+  it("should return total count matching sales-products.json", async () => {
+    const res = await request(app)
+      .get("/api/products/sales")
+      .set(AUTH_HEADER)
+      .set(VALID_COUNTRY);
+    expect(res.statusCode).toBe(200);
+    expect(res.body.length).toBe(salesProducts.length);
+  });
+
+  it("should have boolean inStock values for all products", async () => {
+    const res = await request(app)
+      .get("/api/products/sales")
+      .set(AUTH_HEADER)
+      .set(VALID_COUNTRY);
+    expect(res.statusCode).toBe(200);
+    res.body.forEach((product) => {
+      expect(typeof product.inStock).toBe("boolean");
+    });
+  });
+
+  it("should respond in less than 200ms", async () => {
+    const start = Date.now();
+    const res = await request(app)
+      .get("/api/products/sales")
+      .set(AUTH_HEADER)
+      .set(VALID_COUNTRY);
+    const duration = Date.now() - start;
+    expect(res.statusCode).toBe(200);
+    expect(duration).toBeLessThan(200);
+  });
 });
