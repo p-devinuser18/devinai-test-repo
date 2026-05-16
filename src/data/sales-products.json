@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "name": "Wireless Headphones",
+    "price": 79.99,
+    "category": "electronics",
+    "inStock": true,
+    "count": 150
+  },
+  {
+    "id": 2,
+    "name": "USB-C Charger",
+    "price": 24.99,
+    "category": "electronics",
+    "inStock": true,
+    "count": 300
+  },
+  {
+    "id": 3,
+    "name": "JavaScript: The Good Parts",
+    "price": 29.99,
+    "category": "books",
+    "inStock": true,
+    "count": 85
+  },
+  {
+    "id": 4,
+    "name": "Clean Code",
+    "price": 34.99,
+    "category": "books",
+    "inStock": false,
+    "count": 0
+  },
+  {
+    "id": 5,
+    "name": "Cotton T-Shirt",
+    "price": 19.99,
+    "category": "clothing",
+    "inStock": true,
+    "count": 200
+  },
+  {
+    "id": 6,
+    "name": "Denim Jeans",
+    "price": 49.99,
+    "category": "clothing",
+    "inStock": true,
+    "count": 120
+  }
+]
