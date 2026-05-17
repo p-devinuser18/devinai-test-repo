@@ -1,0 +1,122 @@
+[
+  {
+    "id": 1,
+    "customerName": "Alice Johnson",
+    "customerEmail": "alice.johnson@example.com",
+    "product": "Wireless Bluetooth Headphones",
+    "quantity": 2,
+    "price": 49.99,
+    "totalAmount": 99.98,
+    "status": "PENDING",
+    "orderDate": "2026-05-01",
+    "shippingAddress": "123 Elm Street, Springfield, IL 62701"
+  },
+  {
+    "id": 2,
+    "customerName": "Bob Smith",
+    "customerEmail": "bob.smith@example.com",
+    "product": "Mechanical Keyboard",
+    "quantity": 1,
+    "price": 129.99,
+    "totalAmount": 129.99,
+    "status": "CONFIRMED",
+    "orderDate": "2026-04-28",
+    "shippingAddress": "456 Oak Avenue, Denver, CO 80202"
+  },
+  {
+    "id": 3,
+    "customerName": "Carol Williams",
+    "customerEmail": "carol.williams@example.com",
+    "product": "USB-C Hub Adapter",
+    "quantity": 3,
+    "price": 34.99,
+    "totalAmount": 104.97,
+    "status": "SHIPPED",
+    "orderDate": "2026-04-25",
+    "shippingAddress": "789 Pine Road, Austin, TX 78701"
+  },
+  {
+    "id": 4,
+    "customerName": "David Brown",
+    "customerEmail": "david.brown@example.com",
+    "product": "27-inch 4K Monitor",
+    "quantity": 1,
+    "price": 399.99,
+    "totalAmount": 399.99,
+    "status": "DELIVERED",
+    "orderDate": "2026-04-15",
+    "shippingAddress": "321 Maple Lane, Seattle, WA 98101"
+  },
+  {
+    "id": 5,
+    "customerName": "Eva Martinez",
+    "customerEmail": "eva.martinez@example.com",
+    "product": "Laptop Stand",
+    "quantity": 1,
+    "price": 59.99,
+    "totalAmount": 59.99,
+    "status": "CANCELLED",
+    "orderDate": "2026-04-20",
+    "shippingAddress": "654 Birch Drive, Portland, OR 97201"
+  },
+  {
+    "id": 6,
+    "customerName": "Frank Lee",
+    "customerEmail": "frank.lee@example.com",
+    "product": "Wireless Mouse",
+    "quantity": 4,
+    "price": 24.99,
+    "totalAmount": 99.96,
+    "status": "PENDING",
+    "orderDate": "2026-05-10",
+    "shippingAddress": "987 Cedar Court, Miami, FL 33101"
+  },
+  {
+    "id": 7,
+    "customerName": "Grace Kim",
+    "customerEmail": "grace.kim@example.com",
+    "product": "Noise Cancelling Earbuds",
+    "quantity": 2,
+    "price": 79.99,
+    "totalAmount": 159.98,
+    "status": "CONFIRMED",
+    "orderDate": "2026-05-05",
+    "shippingAddress": "147 Walnut Street, Chicago, IL 60601"
+  },
+  {
+    "id": 8,
+    "customerName": "Henry Davis",
+    "customerEmail": "henry.davis@example.com",
+    "product": "Portable SSD 1TB",
+    "quantity": 1,
+    "price": 109.99,
+    "totalAmount": 109.99,
+    "status": "SHIPPED",
+    "orderDate": "2026-04-30",
+    "shippingAddress": "258 Spruce Boulevard, Boston, MA 02101"
+  },
+  {
+    "id": 9,
+    "customerName": "Ivy Chen",
+    "customerEmail": "ivy.chen@example.com",
+    "product": "Webcam HD 1080p",
+    "quantity": 1,
+    "price": 69.99,
+    "totalAmount": 69.99,
+    "status": "PENDING",
+    "orderDate": "2026-05-12",
+    "shippingAddress": "369 Ash Place, San Francisco, CA 94102"
+  },
+  {
+    "id": 10,
+    "customerName": "Jack Wilson",
+    "customerEmail": "jack.wilson@example.com",
+    "product": "Gaming Mouse Pad XL",
+    "quantity": 2,
+    "price": 19.99,
+    "totalAmount": 39.98,
+    "status": "DELIVERED",
+    "orderDate": "2026-04-10",
+    "shippingAddress": "480 Willow Way, New York, NY 10001"
+  }
+]
